@@ -15,6 +15,7 @@
 #ifndef _PROS_MAIN_H_
 #define _PROS_MAIN_H_
 
+
 /**
  * If defined, some commonly used enums will have preprocessor macros which give
  * a shorter, more convenient naming pattern. If this isn't desired, simply
@@ -79,6 +80,8 @@ void opcontrol(void);
 #endif
 
 #ifdef __cplusplus
+#include "subsystemHeaders/intake.hpp"
+#include "subsystemHeaders/global.hpp"
 /**
  * You can add C++-only headers here
  */

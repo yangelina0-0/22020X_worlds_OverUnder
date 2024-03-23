@@ -10,11 +10,11 @@
 ez::Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is used as the sensor
-  {1, 2, 3}
+  {-10, -9, -12}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is used as the sensor
-  ,{-4, -5, -6}
+  ,{1, 2, 11}
 
   // IMU Port
   ,7
@@ -48,7 +48,7 @@ void initialize() {
 
   // Configure your chassis controls
   chassis.opcontrol_curve_buttons_toggle(true); // Enables modifying the controller curve with buttons on the joysticks
-  chassis.opcontrol_drive_activebrake_set(0); // Sets the active brake kP. We recommend 0.1.
+  chassis.opcontrol_drive_activebrake_set(2.0); // Sets the active brake kP. We recommend 0.1.
   chassis.opcontrol_curve_default_set(0, 0); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
   default_constants(); // Set the drive to your own constants from autons.cpp!
 
@@ -139,7 +139,7 @@ void autonomous() {
 void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
-  
+
   while (true) {
     
     // PID Tuner
@@ -158,9 +158,11 @@ void opcontrol() {
 
       chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
     } 
+    //control intake
+    setIntakeMotors();
 
-    chassis.opcontrol_tank(); // Tank control
-    // chassis.opcontrol_arcade_standard(ez::SPLIT); // Standard split arcade
+    //chassis.opcontrol_tank(); // Tank control
+    chassis.opcontrol_arcade_standard(ez::SPLIT); // Standard split arcade
     // chassis.opcontrol_arcade_standard(ez::SINGLE); // Standard single arcade
     // chassis.opcontrol_arcade_flipped(ez::SPLIT); // Flipped split arcade
     // chassis.opcontrol_arcade_flipped(ez::SINGLE); // Flipped single arcade
@@ -168,6 +170,10 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
+
+    //pneumatics
+    leftWing.button_toggle(master.get_digital(DIGITAL_UP))
+    
 
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
