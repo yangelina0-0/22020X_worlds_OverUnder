@@ -172,9 +172,8 @@ void opcontrol() {
     // . . .
 
     //pneumatics
-    leftWing.button_toggle(master.get_digital(DIGITAL_UP))
+    leftWing.button_toggle(master.get_digital(DIGITAL_UP));
     
-
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
 }
