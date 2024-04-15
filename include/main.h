@@ -82,10 +82,14 @@ void opcontrol(void);
 #ifdef __cplusplus
 #include "subsystemHeaders/intake.hpp"
 #include "subsystemHeaders/global.hpp"
+#include "EZ-Template/drive/drive.hpp"
+#include "autonSelector.hpp"
+//#include "EZ-Template/drive/robotMovement.hpp"
+//#include "EZ-Template/drive/math.hpp"
+
 /**
  * You can add C++-only headers here
  */
 //#include <iostream>
 #endif
-
 #endif  // _PROS_MAIN_H_

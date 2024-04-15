@@ -4,7 +4,8 @@
       "name": "PROS Project",
       "includePath": [
         "${workspaceFolder}/**",
-        "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\worldsOverUnder\\include"
+        "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\worldsOverUnder\\include",
+        "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\@worldsOverUnder\\include"
       ],
       "defines": [
         "_DEBUG",
@@ -18,7 +19,7 @@
       "compileCommands": "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\worldsOverUnder\\compile_commands.json",
       "browse": {
         "path": [
-          "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\worldsOverUnder"
+          "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\@worldsOverUnder"
         ],
         "limitSymbolsToIncludedHeaders": true,
         "databaseFilename": ""

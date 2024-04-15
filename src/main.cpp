@@ -10,17 +10,17 @@
 ez::Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is used as the sensor
-  {-10, -9, -12}
+  {-7, -8, 19}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is used as the sensor
-  ,{1, 2, 11}
+  ,{12, -20, 13}
 
   // IMU Port
-  ,7
+  ,16
 
   // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
-  ,3.25
+  ,4.125
 
   // Cartridge RPM
   ,600
@@ -42,22 +42,22 @@ ez::Drive chassis (
  */
 void initialize() {
   // Print our branding over your terminal :D
-  ez::ez_template_print();
-  
+  //ez::ez_template_print();
   pros::delay(500); // Stop the user from doing anything while legacy ports configure
 
   // Configure your chassis controls
-  chassis.opcontrol_curve_buttons_toggle(true); // Enables modifying the controller curve with buttons on the joysticks
+  chassis.opcontrol_curve_buttons_toggle(false); // Enables modifying the controller curve with buttons on the joysticks
   chassis.opcontrol_drive_activebrake_set(2.0); // Sets the active brake kP. We recommend 0.1.
-  chassis.opcontrol_curve_default_set(0, 0); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
+  chassis.opcontrol_curve_default_set(1.1, 0); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
   default_constants(); // Set the drive to your own constants from autons.cpp!
 
+  //chassis.drive_brake_set(1000);
   // These are already defaulted to these buttons, but you can change the left/right curve buttons here!
-  // chassis.opcontrol_curve_buttons_left_set (pros::E_CONTROLLER_DIGITAL_LEFT, pros::E_CONTROLLER_DIGITAL_RIGHT); // If using tank, only the left side is used. 
-  // chassis.opcontrol_curve_buttons_right_set(pros::E_CONTROLLER_DIGITAL_Y,    pros::E_CONTROLLER_DIGITAL_A);
+  //chassis.opcontrol_curve_buttons_left_set (pros::E_CONTROLLER_DIGITAL_LEFT, pros::E_CONTROLLER_DIGITAL_RIGHT); // If using tank, only the left side is used. 
+  //chassis.opcontrol_curve_buttons_right_set(pros::E_CONTROLLER_DIGITAL_Y, pros::E_CONTROLLER_DIGITAL_A);
 
   // Autonomous Selector using LLEMU
-  ez::as::auton_selector.autons_add({
+  /*ez::as::auton_selector.autons_add({
     Auton("Example Drive\n\nDrive forward and come back.", drive_example),
     Auton("Example Turn\n\nTurn 3 times.", turn_example),
     Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
@@ -65,12 +65,12 @@ void initialize() {
     Auton("Swing Example\n\nSwing in an 'S' curve", swing_example),
     Auton("Combine all 3 movements", combining_movements),
     Auton("Interference\n\nAfter driving forward, robot performs differently if interfered or not.", interfered_example),
-  });
+  });*/
 
   // Initialize chassis and auton selector
   chassis.initialize();
   ez::as::initialize();
-  master.rumble(".");
+  master.rumble("...");
 }
 
 
@@ -117,8 +117,9 @@ void autonomous() {
   chassis.drive_imu_reset(); // Reset gyro position to 0
   chassis.drive_sensor_reset(); // Reset drive sensors to 0
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD); // Set motors to hold.  This helps autonomous consistency
-
-  ez::as::auton_selector.selected_auton_call(); // Calls selected auton from autonomous selector
+  //ez::as::auton_selector.selected_auton_call(); // Calls selected auton from autonomous selector
+  double selectedValue = potentiometer.get_value();
+  autonSelect(selectedValue);
 }
 
 
@@ -141,7 +142,7 @@ void opcontrol() {
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
   while (true) {
-    
+    /*
     // PID Tuner
     // After you find values that you're happy with, you'll have to set them in auton.cpp
     if (!pros::competition::is_connected()) { 
@@ -158,6 +159,8 @@ void opcontrol() {
 
       chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
     } 
+    */
+    
     //control intake
     setIntakeMotors();
 
@@ -172,8 +175,19 @@ void opcontrol() {
     // . . .
 
     //pneumatics
-    leftWing.button_toggle(master.get_digital(DIGITAL_UP));
+    leftWing.button_toggle(master.get_digital(DIGITAL_L1));
+    rightWing.button_toggle(master.get_digital(DIGITAL_R1));
+    rightVertWing.button_toggle(master.get_digital(DIGITAL_R2));
+    leftVertWing.button_toggle(master.get_digital(DIGITAL_L2));
+    backAngle.button_toggle(master.get_digital(DIGITAL_DOWN));
+    leftHang.button_toggle(master.get_digital(DIGITAL_UP));
+    rightHang.button_toggle(master.get_digital(DIGITAL_UP));
+    pros::c::optical_set_led_pwm(21, 50);
+    double brightness = pros::c::optical_get_brightness(21);
+    //std::cout << "optical brightness " << brightness << std::endl;
+    //printf("Brightness value: %lf \n", pros::c::optical_get_brightness(21));
     
+
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
 }

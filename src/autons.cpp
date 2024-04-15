@@ -13,6 +13,35 @@ const int SWING_SPEED = 90;
 ///
 // Constants
 ///
+
+void stopAtWhiteLine(int lines) {
+  //lines is how many lines the robot will detect before it goes too far, e.g. if we start on the goal side, the lines will likely be 2
+  double whiteLineCounter = 0;  
+
+  //Modify these values based on the light conditions on the field
+  double whiteTapeReflection = 0.2;
+  double tileReflection = 0.7;
+  double range = (whiteTapeReflection + tileReflection)/2;
+
+  while (true) {
+    double brightness = pros::c::optical_get_brightness(21);
+
+    if (brightness > range) {
+      //on white tape
+      whiteLineCounter += 1;
+      if (whiteLineCounter >= lines){
+        //stop the robot
+      }
+    }else if (brightness < range) {
+      //on tile
+      pros::delay(100);
+    }else {
+      master.print(0, 0, "Please check the optical sensor");
+    }
+    pros::delay(100);
+  }
+}
+
 void default_constants() {
   chassis.pid_heading_constants_set(3, 0, 20);
   chassis.pid_drive_constants_set(10, 0, 100);
@@ -36,6 +65,7 @@ void drive_example() {
   // The third parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
   // for slew, only enable it when the drive distance is greater then the slew distance + a few inches
 
+  
   chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
   chassis.pid_wait();
 
@@ -44,6 +74,8 @@ void drive_example() {
 
   chassis.pid_drive_set(-12_in, DRIVE_SPEED);
   chassis.pid_wait();
+
+  
 }
 
 ///
@@ -52,7 +84,7 @@ void drive_example() {
 void turn_example() {
   // The first parameter is target degrees
   // The second parameter is max speed the robot will drive at
-
+  std::cout << "turn example" << std::endl;
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
 

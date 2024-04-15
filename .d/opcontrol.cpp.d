@@ -1,4 +1,4 @@
-bin/main.cpp.o: src/main.cpp include/main.h include/api.h \
+bin/opcontrol.cpp.o: src/opcontrol.cpp include/main.h include/api.h \
  include/pros/adi.h include/pros/colors.h include/pros/distance.h \
  include/pros/error.h include/pros/ext_adi.h include/pros/adi.h \
  include/pros/adi.h include/pros/gps.h include/pros/imu.h \
@@ -84,8 +84,7 @@ bin/main.cpp.o: src/main.cpp include/main.h include/api.h \
  include/okapi/api/units/QLength.hpp include/okapi/api/units/QTime.hpp \
  include/EZ-Template/piston.hpp include/EZ-Template/sdcard.hpp \
  include/autons.hpp include/subsystemHeaders/intake.hpp \
- include/subsystemHeaders/global.hpp include/autonSelector.hpp \
- include/main.h
+ include/subsystemHeaders/global.hpp
 include/main.h:
 include/api.h:
 include/pros/adi.h:
@@ -256,5 +255,3 @@ include/EZ-Template/sdcard.hpp:
 include/autons.hpp:
 include/subsystemHeaders/intake.hpp:
 include/subsystemHeaders/global.hpp:
-include/autonSelector.hpp:
-include/main.h:
