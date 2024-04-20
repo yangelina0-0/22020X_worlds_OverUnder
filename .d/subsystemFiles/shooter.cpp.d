@@ -1,4 +1,4 @@
-bin/subsystemFiles/intake.cpp.o: src/subsystemFiles/intake.cpp \
+bin/subsystemFiles/shooter.cpp.o: src/subsystemFiles/shooter.cpp \
  include/main.h include/api.h include/pros/adi.h include/pros/colors.h \
  include/pros/distance.h include/pros/error.h include/pros/ext_adi.h \
  include/pros/adi.h include/pros/adi.h include/pros/gps.h \

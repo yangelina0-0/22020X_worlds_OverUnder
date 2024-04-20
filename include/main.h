@@ -82,8 +82,10 @@ void opcontrol(void);
 #ifdef __cplusplus
 #include "subsystemHeaders/intake.hpp"
 #include "subsystemHeaders/global.hpp"
+#include "subsystemHeaders/shooter.hpp"
 #include "EZ-Template/drive/drive.hpp"
 #include "autonSelector.hpp"
+#include "subsystemHeaders/pneumatics.hpp"
 //#include "EZ-Template/drive/robotMovement.hpp"
 //#include "EZ-Template/drive/math.hpp"
 

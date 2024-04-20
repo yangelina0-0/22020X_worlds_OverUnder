@@ -5,7 +5,9 @@
 extern Drive chassis;
 
 void stopAtWhiteLine(int lines);
-void drive_example();
+void goal_side();
+void non_goal_side();
+void skillsv1();
 void turn_example();
 void drive_and_turn();
 void wait_until_change_speed();

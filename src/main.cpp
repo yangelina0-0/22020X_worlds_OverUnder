@@ -17,7 +17,7 @@ ez::Drive chassis (
   ,{12, -20, 13}
 
   // IMU Port
-  ,16
+  ,15
 
   // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
   ,4.125
@@ -57,15 +57,15 @@ void initialize() {
   //chassis.opcontrol_curve_buttons_right_set(pros::E_CONTROLLER_DIGITAL_Y, pros::E_CONTROLLER_DIGITAL_A);
 
   // Autonomous Selector using LLEMU
-  /*ez::as::auton_selector.autons_add({
-    Auton("Example Drive\n\nDrive forward and come back.", drive_example),
-    Auton("Example Turn\n\nTurn 3 times.", turn_example),
+  ez::as::auton_selector.autons_add({
+    Auton("Example Drive\n\nDrive forward and come back.", skillsv1),
+    Auton("Example Turn\n\nTurn 3 times.", goal_side),
     Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
     Auton("Drive and Turn\n\nSlow down during drive.", wait_until_change_speed),
     Auton("Swing Example\n\nSwing in an 'S' curve", swing_example),
     Auton("Combine all 3 movements", combining_movements),
     Auton("Interference\n\nAfter driving forward, robot performs differently if interfered or not.", interfered_example),
-  });*/
+  });
 
   // Initialize chassis and auton selector
   chassis.initialize();
@@ -117,9 +117,9 @@ void autonomous() {
   chassis.drive_imu_reset(); // Reset gyro position to 0
   chassis.drive_sensor_reset(); // Reset drive sensors to 0
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD); // Set motors to hold.  This helps autonomous consistency
-  //ez::as::auton_selector.selected_auton_call(); // Calls selected auton from autonomous selector
-  double selectedValue = potentiometer.get_value();
-  autonSelect(selectedValue);
+  ez::as::auton_selector.selected_auton_call(); // Calls selected auton from autonomous selector
+  //double selectedValue = potentiometer.get_value();
+  //autonSelect(selectedValue);
 }
 
 
@@ -142,9 +142,10 @@ void opcontrol() {
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
   while (true) {
-    /*
+    
     // PID Tuner
-    // After you find values that you're happy with, you'll have to set them in auton.cpp
+    // After you find values that you're happy with, you'll have to set them in auton.
+    
     if (!pros::competition::is_connected()) { 
       // Enable / Disable PID Tuner
       //  When enabled: 
@@ -154,15 +155,20 @@ void opcontrol() {
         chassis.pid_tuner_toggle();
         
       // Trigger the selected autonomous routine
-      if (master.get_digital_new_press(DIGITAL_B)) 
+      if (master.get_digital(DIGITAL_B)) 
         autonomous();
+        //master.rumble(".");
 
       chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
     } 
-    */
+     
+    
+    
+    
     
     //control intake
-    setIntakeMotors();
+    //setIntakeMotors();
+    //shoot();
 
     //chassis.opcontrol_tank(); // Tank control
     chassis.opcontrol_arcade_standard(ez::SPLIT); // Standard split arcade
@@ -180,8 +186,10 @@ void opcontrol() {
     rightVertWing.button_toggle(master.get_digital(DIGITAL_R2));
     leftVertWing.button_toggle(master.get_digital(DIGITAL_L2));
     backAngle.button_toggle(master.get_digital(DIGITAL_DOWN));
+    //backAngleToggle();
     leftHang.button_toggle(master.get_digital(DIGITAL_UP));
     rightHang.button_toggle(master.get_digital(DIGITAL_UP));
+    midHang.button_toggle(master.get_digital(DIGITAL_UP));
     pros::c::optical_set_led_pwm(21, 50);
     double brightness = pros::c::optical_get_brightness(21);
     //std::cout << "optical brightness " << brightness << std::endl;
