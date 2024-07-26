@@ -84,9 +84,8 @@ bin/subsystemFiles/intake.cpp.o: src/subsystemFiles/intake.cpp \
  include/okapi/api/units/QLength.hpp include/okapi/api/units/QTime.hpp \
  include/EZ-Template/piston.hpp include/EZ-Template/sdcard.hpp \
  include/autons.hpp include/subsystemHeaders/intake.hpp \
- include/subsystemHeaders/global.hpp include/subsystemHeaders/shooter.hpp \
- include/autonSelector.hpp include/main.h \
- include/subsystemHeaders/pneumatics.hpp
+ include/subsystemHeaders/global.hpp include/autonSelector.hpp \
+ include/main.h
 include/main.h:
 include/api.h:
 include/pros/adi.h:
@@ -257,7 +256,5 @@ include/EZ-Template/sdcard.hpp:
 include/autons.hpp:
 include/subsystemHeaders/intake.hpp:
 include/subsystemHeaders/global.hpp:
-include/subsystemHeaders/shooter.hpp:
 include/autonSelector.hpp:
 include/main.h:
-include/subsystemHeaders/pneumatics.hpp:

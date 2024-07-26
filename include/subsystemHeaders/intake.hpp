@@ -1,5 +1,7 @@
 #include "main.h"
 
-void setIntake(int power);
+void setIntakeTop();
+void setIntakeBottom();
 
-void setIntakeMotors();
+void setTopIntakeMotors();
+void setBottomIntakeMotors();

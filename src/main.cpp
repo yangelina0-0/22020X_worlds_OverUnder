@@ -1,23 +1,17 @@
 #include "main.h"
 
-/////
-// For installation, upgrading, documentations and tutorials, check out our website!
-// https://ez-robotics.github.io/EZ-Template/
-/////
-
-
 // Chassis constructor
 ez::Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is used as the sensor
-  {-7, -8, 19}
+  {4, 5, 6}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is used as the sensor
-  ,{12, -20, 13}
+  ,{-1, -2, -3}
 
   // IMU Port
-  ,15
+  ,14
 
   // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
   ,4.125
@@ -26,9 +20,6 @@ ez::Drive chassis (
   ,600
 
   // External Gear Ratio (MUST BE DECIMAL) This is WHEEL GEAR / MOTOR GEAR
-  // eg. if your drive is 84:36 where the 36t is powered, your RATIO would be 84/36 which is 2.333
-  // eg. if your drive is 60:36 where the 36t is powered, your RATIO would be 60/36 which is 0.6
-  // eg. if your drive is 36:60 where the 60t is powered, your RATIO would be 36/60 which is 0.6
   ,1.6667
 );
 
@@ -57,9 +48,9 @@ void initialize() {
   //chassis.opcontrol_curve_buttons_right_set(pros::E_CONTROLLER_DIGITAL_Y, pros::E_CONTROLLER_DIGITAL_A);
 
   // Autonomous Selector using LLEMU
-  ez::as::auton_selector.autons_add({
-    Auton("Example Drive\n\nDrive forward and come back.", skillsv1),
-    Auton("Example Turn\n\nTurn 3 times.", goal_side),
+  ez::as::auton_selector.autons_add({  
+    Auton("goal side", goal_side),
+    Auton("non goal side", non_goal_side),
     Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
     Auton("Drive and Turn\n\nSlow down during drive.", wait_until_change_speed),
     Auton("Swing Example\n\nSwing in an 'S' curve", swing_example),
@@ -73,8 +64,6 @@ void initialize() {
   master.rumble("...");
 }
 
-
-
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
@@ -83,8 +72,6 @@ void initialize() {
 void disabled() {
   // . . .
 }
-
-
 
 /**
  * Runs after initialize(), and before autonomous when connected to the Field
@@ -145,7 +132,7 @@ void opcontrol() {
     
     // PID Tuner
     // After you find values that you're happy with, you'll have to set them in auton.
-    
+    /*
     if (!pros::competition::is_connected()) { 
       // Enable / Disable PID Tuner
       //  When enabled: 
@@ -161,37 +148,20 @@ void opcontrol() {
 
       chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
     } 
-     
-    
-    
-    
+    */
     
     //control intake
-    //setIntakeMotors();
-    //shoot();
+    setTopIntakeMotors();
+    setBottomIntakeMotors();
 
     //chassis.opcontrol_tank(); // Tank control
     chassis.opcontrol_arcade_standard(ez::SPLIT); // Standard split arcade
-    // chassis.opcontrol_arcade_standard(ez::SINGLE); // Standard single arcade
-    // chassis.opcontrol_arcade_flipped(ez::SPLIT); // Flipped split arcade
-    // chassis.opcontrol_arcade_flipped(ez::SINGLE); // Flipped single arcade
-
     // . . .
     // Put more user control code here!
     // . . .
 
     //pneumatics
-    leftWing.button_toggle(master.get_digital(DIGITAL_L1));
-    rightWing.button_toggle(master.get_digital(DIGITAL_R1));
-    rightVertWing.button_toggle(master.get_digital(DIGITAL_R2));
-    leftVertWing.button_toggle(master.get_digital(DIGITAL_L2));
-    backAngle.button_toggle(master.get_digital(DIGITAL_DOWN));
-    //backAngleToggle();
-    leftHang.button_toggle(master.get_digital(DIGITAL_UP));
-    rightHang.button_toggle(master.get_digital(DIGITAL_UP));
-    midHang.button_toggle(master.get_digital(DIGITAL_UP));
-    pros::c::optical_set_led_pwm(21, 50);
-    double brightness = pros::c::optical_get_brightness(21);
+    mogo.button_toggle(master.get_digital(DIGITAL_R1));
     //std::cout << "optical brightness " << brightness << std::endl;
     //printf("Brightness value: %lf \n", pros::c::optical_get_brightness(21));
     

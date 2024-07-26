@@ -5,7 +5,8 @@
       "includePath": [
         "${workspaceFolder}/**",
         "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\worldsOverUnder\\include",
-        "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\@worldsOverUnder\\include"
+        "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\@worldsOverUnder\\include",
+        "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\24-25 HIGH STAKES\\scrimmage1\\include"
       ],
       "defines": [
         "_DEBUG",
@@ -19,7 +20,7 @@
       "compileCommands": "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\worldsOverUnder\\compile_commands.json",
       "browse": {
         "path": [
-          "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\23-24 OVER UNDER\\Codes\\@worldsOverUnder"
+          "c:\\Users\\angel\\OneDrive\\Documents\\VEX\\24-25 HIGH STAKES\\scrimmage1"
         ],
         "limitSymbolsToIncludedHeaders": true,
         "databaseFilename": ""

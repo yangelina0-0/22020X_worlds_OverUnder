@@ -3,6 +3,7 @@
     "files.associations": {
         "condition_variable": "cpp",
         "future": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "numeric": "cpp"
     }
 }
